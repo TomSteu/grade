@@ -201,21 +201,6 @@ pub mod macros {
 	}
 }
 
-pub mod builder {
-
-	#[derive(Debug,Clone)]
-	pub struct Builder {
-		data: String
-	}
-
-	impl From<&str> for Builder {
-		fn from(input: &str) -> Self {
-			unimplemented!();
-		}
-	}
-
-}
-
 
 #[cfg(test)]
 mod tests {

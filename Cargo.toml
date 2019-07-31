@@ -3,15 +3,16 @@ name = "grade"
 version = "0.1.0"
 authors = ["tst <steudtner.tom@gmail.com>"]
 edition = "2018"
+readme = "README.md"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
-[dependencies.gtk]
+[dev-dependencies.gtk]
 version = "0.7.0"
 features = ["v3_22"]
 
-[dependencies.gio]
+[dev-dependencies.gio]
 version = ""
 
-[dependencies.pango]
+[dev-dependencies.pango]
 version = ""

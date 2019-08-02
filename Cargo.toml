@@ -4,15 +4,17 @@ version = "0.1.0"
 authors = ["tst <steudtner.tom@gmail.com>"]
 edition = "2018"
 readme = "README.md"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+repository = "https://github.com/TomSteu/grade"
+license = "MIT"
+license-file = "LICENSE"
+description = "A convenience macro for gtk-rs."
 
 [dev-dependencies.gtk]
 version = "0.7.0"
 features = ["v3_22"]
 
 [dev-dependencies.gio]
-version = ""
+version = "0.7.0"
 
 [dev-dependencies.pango]
-version = ""
+version = "0.7.0"

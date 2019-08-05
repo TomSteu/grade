@@ -199,6 +199,18 @@ pub mod macros {
 	        }
 	    };
 	}
+
+	/// Cascade style syntax
+	#[macro_export]
+	macro_rules! cascade {
+		{
+			$caller:ident {
+				$(..$meth:ident($($arg:expr),*) )*
+			}
+		} => {
+			$( $caller.$meth( $($arg),* ); )*
+		};
+	}
 }
 
 
@@ -206,7 +218,7 @@ pub mod macros {
 mod tests {
 	use gtk::*;
 	use pango::EllipsizeMode;
-	use crate::build;
+	use crate::{build, cascade};
 
 	macro_rules! assert_gtype {
 		($x:expr, $typ:ty) => (assert!($x.clone().dynamic_cast::<$typ>().is_ok()););
@@ -310,6 +322,21 @@ mod tests {
         assert_eq!(grid.get_cell_width(&tv.clone()), 3);
         assert_eq!(tv.get_buffer().unwrap().get_text(start_iter, end_iter, true).unwrap(), "This is a textview, look at it and despair!");
 
+    }
+
+    #[test]
+    fn cascade_test() {
+    	let mut vec1 = Vec::<String>::new();
+    	cascade! {
+    		vec1 {
+    			..push("1".into())
+    			..push("2".into())
+    			..push("3".into())
+    		}
+    	}; 
+
+    	let vec2 = vec! ["1", "2", "3"];
+    	assert_eq!(vec1, vec2);
     }
 }
 

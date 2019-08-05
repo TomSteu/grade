@@ -123,7 +123,7 @@ pub mod macros {
 	    (TextTag) => {gtk::TextTagBuilder};
 	    (TextView) => {gtk::TextViewBuilder};
 	    (ToggleButton) => {gtk::ToggleButtonBuilder};
-	    (ToggleToolButton) => {Tgtk::oggleToolButtonBuilder};
+	    (ToggleToolButton) => {gtk::ToggleToolButtonBuilder};
 	    (ToolButton) => {gtk::ToolButtonBuilder};
 	    (ToolItem) => {gtk::ToolItemBuilder};
 	    (ToolItemGroup) => {gtk::ToolItemGroupBuilder};
@@ -232,7 +232,6 @@ mod tests {
                 		hexpand: true,
                 		vexpand: true,
 
-                		// grid children
                 		-- [attach, 1, 3, 1, 1 ] _left_button:Button {
                 			vexpand: true,
                 			label: "Left",
@@ -249,7 +248,7 @@ mod tests {
                 			ellipsize: EllipsizeMode::End,
 
                 		}
-                		/*some comment */
+
                 		..attach(
                 			& build! {
                 				TextView {

@@ -1,11 +1,10 @@
 [package]
 name = "grade"
-version = "0.1.1"
+version = "0.2.0"
 authors = ["tst <steudtner.tom@gmail.com>"]
 edition = "2018"
 readme = "README.md"
 repository = "https://github.com/TomSteu/grade"
-license = "MIT"
 license-file = "LICENSE"
 description = "A convenience macro for gtk-rs."
 

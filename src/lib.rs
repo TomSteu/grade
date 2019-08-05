@@ -183,7 +183,7 @@ pub mod macros {
 	            $( $field:ident:$val:expr, )*
 	            $( => $signal:path: $callback:expr, )*
 	            $( -- $([$pack_func:ident $(,$pack_arg:expr)*])? $child:ident$(:$child_alias:ident)? {$($child_body:tt)*})*
-	            $( .. $meth:ident($($meth_body:expr),*) )*
+	            $( .. $meth:ident($($meth_body:expr),*)$(.$more_meth:ident( $($more_args:expr),* ))*  )*
 	        } 
 	    } => {
 	        {
@@ -193,7 +193,7 @@ pub mod macros {
 	           let grade_widget = builder.build();
 	           $crate::__grade_link_to_name!($parent$(:$parent_alias)?, grade_widget);
 	           $( $crate::__build_func!(grade_widget, $([$pack_func $(,$pack_arg)*],)? $child$(:$child_alias)? {$($child_body)*}); )*
-	           $( grade_widget.$meth($($meth_body),*); )*
+	           $( grade_widget.$meth($($meth_body),*)$(.$more_meth( $($more_args),* ))* ; )*
 	           $( $crate::__grade_connect_signal!(grade_widget, $signal, $callback);)*
 	           grade_widget
 	        }
@@ -205,10 +205,12 @@ pub mod macros {
 	macro_rules! cascade {
 		{
 			$caller:ident {
-				$(..$meth:ident($($arg:expr),*) )*
+				$(
+					..$meth:ident($($arg:expr),*)$(.$more_meth:ident( $($more_args:expr),* ))* 
+				)*
 			}
 		} => {
-			$( $caller.$meth( $($arg),* ); )*
+			$( $caller.$meth( $($arg),* )$(.$more_meth( $($more_args),* ))* ; )*
 		};
 	}
 }
@@ -325,7 +327,7 @@ mod tests {
     }
 
     #[test]
-    fn cascade_test() {
+    fn cascade_test1() {
     	let mut vec1 = Vec::<String>::new();
     	cascade! {
     		vec1 {
@@ -337,6 +339,16 @@ mod tests {
 
     	let vec2 = vec! ["1", "2", "3"];
     	assert_eq!(vec1, vec2);
+    }
+
+    #[test]
+    fn cascade_test2() {
+    	let test_object = Some(Some(1));
+    	cascade! {
+    		test_object {
+    			..unwrap().unwrap()
+    		}
+    	} ;
     }
 }
 

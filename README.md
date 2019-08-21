@@ -27,7 +27,7 @@ let main_window = build! {
 		// children
 		-- Viewport {
 		
-			// named object, for to reference it 
+			// named object, will be saved under this identifier
 			-- main_grid: Grid {
 				vexpand: true,
 				name: "main_grid",
